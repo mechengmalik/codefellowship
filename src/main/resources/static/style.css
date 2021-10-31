@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+}
+body{
+background-image:url(https://www.onholdinc.com/mohblog/wp-content/uploads/2019/09/music-news.jpg)}
+main{
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 70%;
+}
+
+.container{
+
+}
+h1{
+    text-align: center;
+    color: skyblue;
+}
+h2{
+font-size: 400%
+}
+
+h3{
+font-size: 200%;
+}
+h4{
+}
+
+button{
+background-color:skyblue;
+}
+
+
+ img{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top:3%;
+}
+
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: skyblue;
+}
