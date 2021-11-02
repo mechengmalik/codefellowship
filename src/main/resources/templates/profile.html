@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>profile</title>
+</head>
+<body>
+
+    <div class="card">
+        <img src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4><b>username: <span th:text="${username}"></span></b></h4>
+            <p>user type: <span th:text="${userRole}"></span></p>
+            <p>first name: <span th:text="${firstname}"></span></p>
+            <p>last name: <span th:text="${lastname}"></span></p>
+            <p>date of birth: <span th:text="${dob}"></span></p>
+            <p>bio: <span th:text="${bio}"></span></p>
+            <br>
+
+<!--            <ul>-->
+<!--                <li th:each="post : ${user.posts}" th:text="${post}"></li>-->
+<!--            </ul>-->
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>

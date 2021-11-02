@@ -1,10 +1,13 @@
 package com.example.codefellowship.Model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -19,6 +22,9 @@ public class ApplicationUser implements UserDetails {
     private String lastName;
     private String dob;
     private String bio;
+    @OneToMany(mappedBy = "owner",cascade=CascadeType.ALL)
+    private List<Post> posts;
+//    private String authority;
 
     public ApplicationUser(){
 
@@ -32,11 +38,20 @@ public class ApplicationUser implements UserDetails {
         this.lastName = lastName;
         this.dob = dob;
         this.bio = bio;
+
+//        this.authority=authority;
+
     }
+
+
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+//        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
+//        List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+//        grantedAuthorities.add(simpleGrantedAuthority);
+//        return grantedAuthorities;
         return null;
     }
 
@@ -82,6 +97,18 @@ public class ApplicationUser implements UserDetails {
         this.bio = bio;
     }
 
+    public int getId() {
+        return id;
+    }
+
+//    public String getAuthority() {
+//        return authority;
+//    }
+
+//    public void setAuthority(String authority) {
+//        this.authority = authority;
+//    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -100,5 +127,18 @@ public class ApplicationUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dob='" + dob + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
     }
 }
