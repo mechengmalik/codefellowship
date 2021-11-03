@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Feed</title>
+</head>
+<body>
+<h1>follower's posts</h1>
+
+
+<div class="row">
+    <div th:each="user:${peopleIfollowList}" class="card" style="width: 18rem;margin: 10px;">
+        <h5 class=" card-title" ><a th:href="${'/users/' + user.id}">[[${user.username}]]</a></h5>
+        <div class="card-body" >
+            <th:block th:each="post: ${user.posts}">
+                <p th:text="${post.timeStamp}" class="card-text"></p>
+                <p th:text="${post.body}" class="card-text"></p>
+                <p th:text="------------------------" ></p>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
