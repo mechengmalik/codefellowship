@@ -8,4 +8,5 @@ public interface ApplicationUserRepository extends CrudRepository<ApplicationUse
 
 
      ApplicationUser findUserById(int id);
+     ApplicationUser getOne(int followUser);
 }

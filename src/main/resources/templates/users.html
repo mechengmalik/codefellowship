@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,22 +9,29 @@
 </head>
 <body>
 <div th:if="${owner != null}">
-    <h2>This is <span th:text=${owner.username}></span>'s page</h2>
+    <h2><span th:text=${owner.username}></span>'s page</h2>
+
+    <form th:if="${owner.username} != ${#authentication.name} and ${!visitor.getUsersIFollow().contains(owner)}" action="/follow" method="post">
+        <input type="hidden" name="followUser" th:value="${owner.id}">
+        <input class="button" type="submit" value="Follow !" />
+    </form>
+
+
     <p>Profile picture: </p>
     <img src="https://www.pixsy.com/wp-content/uploads/2021/04/ben-sweet-2LowviVHZ-E-unsplash-1.jpeg" alt="Avatar" style="width:100%">
 
     <p>Username: <span th:text=${owner.username}></span></p>
-<!--    <p>First Name: <span th:text=${owner.firstname}></span></p>-->
-<!--    <p>Last Name: <span th:text=${owner.lastname}></span></p>-->
-<!--    <p>Date Of Birth: <span th:text=${owner.dob}></span></p>-->
-<!--    <p>Bio: <span th:text=${owner.bio}></span></p>-->
+    <p>First Name: <span th:text=${owner.firstName}></span></p>
+    <p>Last Name: <span th:text=${owner.lastName}></span></p>
+    <p>Date Of Birth: <span th:text=${owner.dob}></span></p>
+    <p>Bio: <span th:text=${owner.bio}></span></p>
     <h2>My Posts</h2>
     <br>
     <ul>
         <li th:each="post : ${owner.posts}" th:text="${post}"></li>
     </ul>
 </div>
-<div  th:if="${visitors==owner.username}">
+<div  th:if="${visitorss==owner.username}">
 
 </div>
 

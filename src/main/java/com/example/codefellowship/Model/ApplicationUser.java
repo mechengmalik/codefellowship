@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -24,11 +25,27 @@ public class ApplicationUser implements UserDetails {
     private String bio;
     @OneToMany(mappedBy = "owner",cascade=CascadeType.ALL)
     private List<Post> posts;
-//    private String authority;
 
+    @ManyToMany
+    @JoinTable(
+            name="posters_and_followers",
+            joinColumns = { @JoinColumn(name="follower") },
+            inverseJoinColumns = { @JoinColumn(name = "poster")}
+    )
+    Set<ApplicationUser> usersIFollow;
+
+    @ManyToMany(mappedBy = "usersIFollow")
+    Set<ApplicationUser> usersFollowingMe;
+
+    public void followUser(ApplicationUser followedUser){
+        usersIFollow.add(followedUser);
+    }
     public ApplicationUser(){
 
     }
+
+
+
 
     public ApplicationUser( String username, String password, String firstName, String lastName, String dob, String bio) {
 
@@ -39,7 +56,7 @@ public class ApplicationUser implements UserDetails {
         this.dob = dob;
         this.bio = bio;
 
-//        this.authority=authority;
+
 
     }
 
@@ -101,7 +118,29 @@ public class ApplicationUser implements UserDetails {
         return id;
     }
 
-//    public String getAuthority() {
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+    public Set<ApplicationUser> getUsersIFollow() {
+        return usersIFollow;
+    }
+
+    public void setUsersIFollow(Set<ApplicationUser> usersIFollow) {
+        this.usersIFollow = usersIFollow;
+    }
+
+    public Set<ApplicationUser> getUsersFollowingMe() {
+        return usersFollowingMe;
+    }
+
+    public void setUsersFollowingMe(Set<ApplicationUser> usersFollowingMe) {
+        this.usersFollowingMe = usersFollowingMe;
+    }
+    //    public String getAuthority() {
 //        return authority;
 //    }
 
@@ -128,6 +167,7 @@ public class ApplicationUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 
     @Override
     public String toString() {

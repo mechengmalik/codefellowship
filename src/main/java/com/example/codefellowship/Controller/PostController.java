@@ -15,6 +15,7 @@ import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 @Controller
 public class PostController {
@@ -42,6 +43,19 @@ public class PostController {
         ApplicationUser User = applicationUserRepository.findByUsername(p.getName());
         Post post = new Post(body, dateFormat.format(timeStamp), User);
         postRepository.save(post);
-        return new RedirectView("/profile/" + User.getId());
+        return new RedirectView("/user/" + User.getId());
+    }
+
+    @GetMapping("/feed")
+    public String showFeed(Principal p, Model m) {
+        if (p != null) {
+            m.addAttribute("username", p.getName());
+        }
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(p.getName());
+        Set<ApplicationUser> followerList = currentUser.getUsersIFollow();
+        m.addAttribute("peopleIfollowList", followerList);
+        m.addAttribute("username", p.getName());
+        return "feed";
+
     }
 }
